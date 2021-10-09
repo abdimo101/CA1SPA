@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webpack/Babel-demo</title>
+</head>
+
+<body>
+  <!--
+    This div is added to remove the flicker that comes from bootstrap being loaded
+    first in index.js
+    REMEMBER to set display to "block" in index.js, otherwise you will not see anything
+  -->
+  <div id="all-content" style="display: none;">
+    <ul id="menu" class="header">
+      <li><a href="" id="about">About</a></li>
+      <li><a href="" id="ex1">Person</a></li>
+      <li><a href="" id="ex2">Hobbies</a></li>
+      <li><a href="" id="ex3">Ex3</a></li>
+    </ul>
+
+    <div class="content">
+
+      <!-- This is were you should place your basic HTML for exercise-1 -->
+      <div id="person_html" style="display:none;">
+        <h3>Person</h3>
+        <p>List of all persons</p>
+        <table id="persons_table" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>First name</th>
+              <th>Last name</th>
+              <th>Phone number</th>
+              <th>Email Address</th>
+              <th>Address</th>
+              <th>Zipcode</th>
+              <th>City</th>
+              <th></th>
+              
+            </tr>
+          </thead>
+          <tbody id="tablerows">
+            
+          </tbody>
+        </table>
+
+       
+        <!--EDIT PERSON MODAL-->
+        <div id="editmodal" class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Edit person</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <p>Edit fields and safe changes</p>
+              </div>
+
+              <div class="form-group">
+                <label for="ID">ID</label>
+                <input id="edit_id" name="ID" type="text" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label for="firstName">First name</label>
+                <input id="firstName" name="firstName" type="text" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label for="lastName">Last name</label>
+                <input id="lastName" name="lastName" type="text" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label for="phoneNumber">Phone number</label>
+                <input id="phoneNumber" name="phoneNumber" type="text" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label for="emailAddress">Email Address</label>
+                <input id="emailAddress" name="emailAddress" type="text" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label for="Address">Address</label>
+                <input id="Address" name="Address" type="text" class="form-control"/>
+              </div>
+              <div class="form-group">
+                <label for="zipcode">Zipcode</label>
+                <input id="zipcode" name="zipcode" type="text" class="form-control"/>
+              </div>
+
+            
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="edit-safebtn" type="button" class="btn btn-primary">Save changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!--DELETE PERSON MODAL-->
+        <div id="deletemodal" class="modal" tabindex="-1">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Delete person</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="form-group">
+                <label for="ID">ID</label>
+                <input id="delete_id" name="ID" type="text" class="form-control"/>
+              </div>
+              <div class="modal-body">
+                <p>Confirm the person you want to delete and safe changes</p>
+              </div>
+
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button id="delete-safebtn" type="button" class="btn btn-primary">Safe changes</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p>Get persons by Hobby (name)</p> 
+        <ul id="hobbies"></ul>
+        <form id="hobby_inputform">
+        <input type="text" id="hobby_textinput"/>
+        <button id="getbyhobbybtn">Enter</button>
+      </form>
+      <br>
+      <br>
+      <button id="createPerson_btn" type="button" class="btn btn-primary">Create Person</button>
+      
+      <form>
+        <label for="create_fname">First name:</label><br>
+        <input type="text" id="create_fname" name="create_fname"><br>
+        <label for="create_lname">Last name:</label><br>
+        <input type="text" id="create_lname" name="create_lname"><br>
+        <label for="create_phone">Phone number:</label><br>
+        <input type="text" id="create_phone" name="create_phone"><br>
+        <label for="create_email">Email address:</label><br>
+        <input type="text" id="create_email" name="create_email"><br>
+        <label for="create_address">Address:</label><br>
+        <input type="text" id="create_address" name="create_address"><br>
+        <label for="create_zipcode>">Zipcode:</label><br>
+        <input type="text" id="create_zipcode" name="create_zipcode">
+      </form>
+
+      </div>
+      <!-- End of HTML for exercise-1 -->
+
+
+
+      <!-- This is were you should place your basic HTML for exercise-2 -->
+      <div id="ex2_html" style="display:none;">
+        <h3>Exercise 2</h3>
+        <p id="ex2p">Add your basic HTML for Exercise 2 here</p>
+      </div>
+      <!-- End of HTML for exercise-2 -->
+
+
+      <!-- This is were you should place your basic HTML for exercise-3 -->
+      <div id="ex3_html" style="display:none;">
+        <h3>Ex-3</h3>
+        <p>Add your basic HTML for Exercise 3 here</p>
+
+        <div class="row" style="min-height: 5em;"">
+      <div class=" col-md-8 pre-scrollable" style="background-color: lightgrey;">
+          <h5>All Users</h5>
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Id</th>
+                <th>Age</th>
+                <th>Name
+                <th>
+                <th>Gender</th>
+                <th>Email </th>
+            </thead>
+            <tbody id="allUserRows">
+            <tbody>
+          </table>
+        </div>
+        <div class="col-md-4" style="background-color: powderblue;">
+          <h5>Find User</h5>
+        </div>
+      </div>
+      <div class="row" style="min-height: 5em;">
+        <div class="col-md-4" style="background-color: powderblue;">
+          <h5>Add User</h5>
+        </div>
+        <div class="col-md-4" style="background-color: lightgrey;">
+          <h5>Edit User</h5>
+        </div>
+        <div class="col-md-4" style="background-color: powderblue;">
+          <h5>Delete User</h5>
+        </div>
+      </div>
+      <!-- </div> -->
+      <!-- End of HTML for exercise-3 -->
+
+      <!---- HTML for the About page -->
+
+    </div>
+
+    <div id="about_html" style="display:none;">
+      <h3>About</h3>
+      <p>Watch the small video given as intro to this code, BEFORE you start using it</p>
+    </div>
+    <!-- End of HTML for ABOUT Page -->
+
+
+    <!--End of all content -->
+  </div>
+
+  <!-- #################################################################-->
+  <!-- IMPORTANT  DO NOT IMPORT ANY JavaScript in this file by YOURSELF -->
+  <!-- #################################################################-->
+
+</body>
+
+</html>

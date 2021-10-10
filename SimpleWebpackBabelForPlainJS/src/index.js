@@ -28,8 +28,42 @@ switch(name)
 {
   case "edit": editPerson(id); break;
   case "delete": deletePerson(id); break;
-}})
+}
+})
 
+
+function getPersonByPhone(phone){
+  fetch(`${SERVER_URL}/person/phone/${phone}`)
+  .then(handleHttpErrors)
+  .then(data =>
+   {
+    let phoneRows = getPhoneRow(data)
+    document.getElementById("tablerows").innerHTML = phoneRows;
+  })
+  .catch(errorHandling)
+}
+document.getElementById("getbyphonebtn").addEventListener('click', e =>{
+  e.preventDefault();
+  const phone = document.getElementById("phone_textinput").value;
+  getPersonByPhone(phone)
+})
+
+
+
+
+function getPhoneRow(p){
+`<tr>
+  <td>${p.ID}</td>
+  <td>${p.firstName}</td>
+  <td>${p.lastName}</td>
+  <td>${p.phoneNumber}</td>
+  <td>${p.emailAddress}</td>
+  <td>${p.addressDTO.Address}</td>
+  <td>${p.addressDTO.cityInfoDTO.zipcode}</td>
+  <td>${p.addressDTO.cityInfoDTO.city}</td>
+  </tr>`
+  
+}
 function getPersonByHobby(){
   let getPerson = document.getElementById("getbyhobbybtn");
   getPerson.addEventListener('click', e => {
@@ -43,7 +77,7 @@ function getPersonByHobby(){
       
       const allRows =  data.map(p => getPersonTableRow(p))
       const allRowsAsString = allRows.join("")
-      document.getElementById("tablerows").innerHTML = allRowsAsString;;
+      document.getElementById("tablerows").innerHTML = allRowsAsString;
       
       
     })
@@ -150,7 +184,7 @@ function deletePerson(ID)
    fetch(`https://densorteudvikler.dk/devops-starter/api/person/delete/`+ id, options)
    .then(handleHttpErrors)
    .then(data => {
-     editModal.toggle()
+    deleteModal.toggle();
     getAllPersons()
    })
    
@@ -231,9 +265,42 @@ function getPersonTableRow(p)
 
 /* JS For Exercise-2 below */
 
+function getAllCities(){
+  fetch(`${SERVER_URL}/cityinfo/all`)
+   .then(handleHttpErrors)
+   .then(data =>
+    {
+     // Lav tabel rækker med data
+    const allRows =  data.map(c => getCityTableRow(c))
+    const allRowsAsString = allRows.join("")
+    document.getElementById("cityrows").innerHTML = allRowsAsString;
+   })
+   .catch(errorHandling);
+  }
 
+ function getCityTableRow(c){
+  return `<tr>
+  <td>${c.zipcode}</td>
+  <td>${c.city}</td>
+  </tr>`
+ } 
 
-/* JS For Exercise-3 below */
+function getCityByZipcode(zipcode){
+    fetch(`${SERVER_URL}/cityinfo/zip/${zipcode}`)
+    .then(handleHttpErrors)
+    .then(data => {
+       const cityRows =  getCityTableRow(data)
+      document.getElementById("cityrows").innerHTML = cityRows;
+    })
+    .catch(errorHandling);
+  }
+  document.getElementById("getbyzipcodebtn").addEventListener('click', e => {
+    e.preventDefault();
+  const zipcode = document.getElementById("zipcode_textinput").value;
+  getCityByZipcode(zipcode)
+
+})
+
 
 /* Helper functions */
 function makeOptions(method, body) {
@@ -275,7 +342,7 @@ function hideAllShowOne(idToShow)
 {
   document.getElementById("about_html").style = "display:none"
   document.getElementById("person_html").style = "display:none"
-  document.getElementById("ex2_html").style = "display:none"
+  document.getElementById("cityinfo_html").style = "display:none"
   document.getElementById("ex3_html").style = "display:none"
   document.getElementById(idToShow).style = "display:block"
 }
@@ -286,8 +353,7 @@ function menuItemClicked(evt)
   switch (id)
   {
     case "ex1": hideAllShowOne("person_html"); getAllPersons(); break
-    case "ex2": hideAllShowOne("ex2_html"); break
-    case "ex3": hideAllShowOne("ex3_html"); break
+    case "ex2": hideAllShowOne("cityinfo_html"); getAllCities(); break
     default: hideAllShowOne("about_html"); break
   }
   evt.preventDefault();

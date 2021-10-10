@@ -17,16 +17,15 @@
     <ul id="menu" class="header">
       <li><a href="" id="about">About</a></li>
       <li><a href="" id="ex1">Person</a></li>
-      <li><a href="" id="ex2">Hobbies</a></li>
-      <li><a href="" id="ex3">Ex3</a></li>
+      <li><a href="" id="ex2">CityInfo</a></li>
     </ul>
 
     <div class="content">
 
       <!-- This is were you should place your basic HTML for exercise-1 -->
       <div id="person_html" style="display:none;">
-        <h3>Person</h3>
-        <p>List of all persons</p>
+        <h3 style="text-align: center;">Person</h3>
+        <h4>List of all persons</h4>
         <table id="persons_table" class="table table-striped">
           <thead>
             <tr>
@@ -122,17 +121,25 @@
             </div>
           </div>
         </div>
-
-        <p>Get persons by Hobby (name)</p> 
-        <ul id="hobbies"></ul>
-        <form id="hobby_inputform">
-        <input type="text" id="hobby_textinput"/>
-        <button id="getbyhobbybtn">Enter</button>
+     
       </form>
-      <br>
-      <br>
+      <h6>Get persons by Hobby (name)</h6> 
+      <ul id="hobbies"></ul>
+      <form id="hobby_inputform">
+      <input type="text" id="hobby_textinput"/>
+      <button id="getbyhobbybtn">Submit</button>
+      </form>
+      <br>    
+        <h6>Get persons by phone</h6> 
+        <ul id="phones"></ul>
+        <form id="phone_inputform">
+        <input type="text" id="phone_textinput"/>
+        <button id="getbyphonebtn">Submit</button>
+        <br>
+        <br>
       <button id="createPerson_btn" type="button" class="btn btn-primary">Create Person</button>
-      
+      <br>
+      <br>
       <form>
         <label for="create_fname">First name:</label><br>
         <input type="text" id="create_fname" name="create_fname"><br>
@@ -154,9 +161,30 @@
 
 
       <!-- This is were you should place your basic HTML for exercise-2 -->
-      <div id="ex2_html" style="display:none;">
-        <h3>Exercise 2</h3>
-        <p id="ex2p">Add your basic HTML for Exercise 2 here</p>
+      <div id="cityinfo_html" style="display:none;">
+        <h3 style="text-align: center;">Cityinfo</h3>
+      </form>
+      <h6>Get City by zipcode</h6> 
+      <ul id="cities"></ul>
+      <form id="city_inputform">
+      <input type="text" id="zipcode_textinput"/>
+      <button id="getbyzipcodebtn">Enter</button>
+    </form>
+      
+        <br>
+        <h6 id="ex2p">List of all cities</h6>
+        <table id="cityinfo_table" class="table table-striped">
+          <thead>
+            <tr>
+              <th>Zipcode</th>
+              <th>City</th>
+            </tr>
+          </thead>
+          <tbody id="cityrows">
+            
+          </tbody>
+        </table>
+
       </div>
       <!-- End of HTML for exercise-2 -->
 
@@ -166,7 +194,7 @@
         <h3>Ex-3</h3>
         <p>Add your basic HTML for Exercise 3 here</p>
 
-        <div class="row" style="min-height: 5em;"">
+        <div class="row" style="min-height: 5em;">
       <div class=" col-md-8 pre-scrollable" style="background-color: lightgrey;">
           <h5>All Users</h5>
           <table class="table">
@@ -206,8 +234,10 @@
     </div>
 
     <div id="about_html" style="display:none;">
-      <h3>About</h3>
-      <p>Watch the small video given as intro to this code, BEFORE you start using it</p>
+      <h3 style="text-align: center;">About</h3>
+      <h4 style="text-align: center;">CA1 Single Page Application</h4>
+      <h5 style="text-align: center;">Name: Abdi Abdulle</h4>
+      <h5 style="text-align: center;">Group: A6</h4>
     </div>
     <!-- End of HTML for ABOUT Page -->
 
